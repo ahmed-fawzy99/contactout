@@ -1,0 +1,6 @@
+.env
+auth/cookie.txt
+auth/csrfmiddlewaretoken.txt
+
+logs
+*.log

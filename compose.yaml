@@ -1,0 +1,25 @@
+services:
+  contactout:
+    build: .
+    container_name: contactout-api
+    restart: unless-stopped
+    ports:
+      - "8002:8000"
+    volumes:
+      - .:/app:rw
+    working_dir: /app
+    networks:
+      - web
+      - database
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.contactout.rule=Host(`co.jasperdewinter.nl`)"
+      - "traefik.http.services.contactout.loadbalancer.server.port=8000"
+      - "traefik.http.routers.contactout.tls=true"
+      - "traefik.http.routers.contactout.tls.certresolver=myresolver"
+
+networks:
+  web:
+    external: true
+  database:
+    external: true
